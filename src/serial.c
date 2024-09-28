@@ -1,3 +1,4 @@
+
 void putc(int data);
 
 void main{
