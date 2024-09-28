@@ -44,17 +44,7 @@ maincore:
     // set stack before our code
     ldr     x5, =_start
     mov     sp, x5
- 
-    // clear bss
-    ldr     x5, =__bss_start
-    ldr     w6, =__bss_size
-3:  cbz     w6, 4f
-    str     xzr, [x5], #8
-    sub     w6, w6, #1
-    cbnz    w6, 3b
-
-
-/*
+    /*
  * This code puts the CPU in execution level 0. You can paste it in to your
  * boot.s file right after stack pointer setup.
  *
@@ -120,6 +110,17 @@ maincore:
 // CALL kernel_main after this...
     // for failsafe, halt this core too
 //    b 1b
+ 
+    // clear bss
+    ldr     x5, =__bss_start
+    ldr     w6, =__bss_size
+3:  cbz     w6, 4f
+    str     xzr, [x5], #8
+    sub     w6, w6, #1
+    cbnz    w6, 3b
+
+
+
  
     // jump to C code, should not return
 4:  bl      kernel_main
