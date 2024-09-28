@@ -52,9 +52,7 @@ maincore:
     str     xzr, [x5], #8
     sub     w6, w6, #1
     cbnz    w6, 3b
- 
-    // jump to C code, should not return
-4:  bl      kernel_main
+
 
 /*
  * This code puts the CPU in execution level 0. You can paste it in to your
@@ -122,3 +120,7 @@ maincore:
 // CALL kernel_main after this...
     // for failsafe, halt this core too
 //    b 1b
+ 
+    // jump to C code, should not return
+4:  bl      kernel_main
+
